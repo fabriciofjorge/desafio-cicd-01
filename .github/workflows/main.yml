@@ -59,7 +59,7 @@ jobs:
             fabriciojorge/projeto-devops-pro:v${{ github.run_number}}
 
       - name: Executar o Trivy
-        uses: aquasecurity/trivy-action@0.23.0
+        uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: "image"
           image-ref: fabriciojorge/projeto-devops-pro:v${{ github.run_number }}
