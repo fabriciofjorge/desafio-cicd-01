@@ -82,3 +82,15 @@ jobs:
     needs: [release]
     uses: fabriciofjorge/desafio-cicd-01/.github/workflows/deploy.yml@main
     secrets: inherit
+    with:
+      environment-name: homologacao
+      environment-url: http://homologacao.fabriciojorge.com
+
+  deploy-producao:
+    name: Deploy de produção
+    needs: [release]
+    uses: fabriciofjorge/desafio-cicd-01/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment-name: producao
+      environment-url: http://producao.fabriciojorge.com
