@@ -3,10 +3,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgre
-spec: 
+spec:
   replicas: 1
   selector:
-    matchLabels: 
+    matchLabels:
       app: postgre
   template:
     metadata:
@@ -17,12 +17,12 @@ spec:
         - name: postgre
           image: postgres:13.1
           env:
-          - name: POSTGRES_PASSWORD
-            value: Passw0rd2024!
-          - name: POSTGRES_USER
-            value: reviewfilmes
-          - name: POSTGRES_DB
-            value: reviewfilmes
+            - name: POSTGRES_PASSWORD
+              value: Passw0rd2024!
+            - name: POSTGRES_USER
+              value: reviewfilmes
+            - name: POSTGRES_DB
+              value: reviewfilmes
           ports:
             - containerPort: 5432
 ---
@@ -30,7 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgre
-spec: 
+spec:
   selector:
     app: postgre
   ports:
@@ -41,10 +41,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviewfilmes
-spec: 
+spec:
   replicas: 1
   selector:
-    matchLabels: 
+    matchLabels:
       app: reviewfilmes
   template:
     metadata:
@@ -53,12 +53,12 @@ spec:
     spec:
       containers:
         - name: reviewfilmes
-          image: fabricioveronez/rv-teste
+          image: fabriciojorge/projeto-devops-pro
           env:
-          - name: ASPNETCORE_HTTP_PORTS
-            value: "8080"
-          - name: ConnectionStrings__DefaultConnection
-            value: "Host=postgre;Database=reviewfilmes;Username=reviewfilmes;Password=Passw0rd2024!"
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "8080"
+            - name: ConnectionStrings__DefaultConnection
+              value: "Host=postgre;Database=reviewfilmes;Username=reviewfilmes;Password=Passw0rd2024!"
           ports:
             - containerPort: 8080
 ---
@@ -66,7 +66,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reviewfilmes
-spec: 
+spec:
   selector:
     app: reviewfilmes
   ports:
@@ -84,13 +84,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: homologacao.fabricioveronez.com
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: reviewfilmes
-            port: 
-              number: 80
+    - host: homologacao.fabriciojorge.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: reviewfilmes
+                port:
+                  number: 80
