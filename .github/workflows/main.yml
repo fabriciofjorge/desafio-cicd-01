@@ -80,5 +80,5 @@ jobs:
   deploy-homolog:
     name: Deploy de homologação
     needs: [release]
-    uses: fabriciofjorge/desafio-cicd-01/.github/workflows/deployment.yaml@main
+    uses: fabriciofjorge/desafio-cicd-01/.github/workflows/deploy.yml@main
     secrets: inherit
